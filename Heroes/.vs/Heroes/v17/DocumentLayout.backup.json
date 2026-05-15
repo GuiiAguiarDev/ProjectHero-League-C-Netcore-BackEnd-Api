@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Guilherme Aguiar\\Desktop\\Heroes\\Heroes\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{24D58E16-5C9E-4705-B6F3-52E5EC9DA0CC}|Application\\Application.csproj|c:\\users\\guilherme aguiar\\desktop\\heroes\\heroes\\application\\services\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{24D58E16-5C9E-4705-B6F3-52E5EC9DA0CC}|Application\\Application.csproj|solutionrelative:application\\services\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0CE7206D-6652-4837-ABB4-9F08E0DAD05F}|Heroes\\Heroes.csproj|c:\\users\\guilherme aguiar\\desktop\\heroes\\heroes\\heroes\\controllers\\heroescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0CE7206D-6652-4837-ABB4-9F08E0DAD05F}|Heroes\\Heroes.csproj|solutionrelative:heroes\\controllers\\heroescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HeroesController.cs",
+              "DocumentMoniker": "C:\\Users\\Guilherme Aguiar\\Desktop\\Heroes\\Heroes\\Heroes\\Controllers\\HeroesController.cs",
+              "RelativeDocumentMoniker": "Heroes\\Controllers\\HeroesController.cs",
+              "ToolTip": "C:\\Users\\Guilherme Aguiar\\Desktop\\Heroes\\Heroes\\Heroes\\Controllers\\HeroesController.cs",
+              "RelativeToolTip": "Heroes\\Controllers\\HeroesController.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAmwEsAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T16:15:03.373Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Service.cs",
+              "DocumentMoniker": "C:\\Users\\Guilherme Aguiar\\Desktop\\Heroes\\Heroes\\Application\\Services\\Service.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\Service.cs",
+              "ToolTip": "C:\\Users\\Guilherme Aguiar\\Desktop\\Heroes\\Heroes\\Application\\Services\\Service.cs",
+              "RelativeToolTip": "Application\\Services\\Service.cs",
+              "ViewState": "AgIAAGIAAAAAAAAAAAAawF4AAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T16:10:14.315Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

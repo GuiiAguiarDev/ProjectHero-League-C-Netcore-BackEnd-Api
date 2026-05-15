@@ -1,0 +1,248 @@
+Como fazer a comunicação HttpClient de forma correta - MicroServiço relacionamento por referencia.
+
+
+1- Criar o Id na classe dependente, no nosso caso é employee, porque so posso cadastrar um funcionario se ele tiver um departamento.
+Ou se tenho Heroe e League, Dentro de Heroe vou criar o Id de League, porque nesse outro exemplo só posso cadastrar um
+Heroe se ele fizer parte de uma League.
+Passar o atributo no
+construtor tambem 
+Exemplo Código: public Guid DepartmentId { get; set; }
+		ou
+		public Guid HeroeId {get;set;}
+
+2-Criar o atributo na DTo tambem public Guid DepartmentId { get; set; } ou public Guid HeroeId {get;set;}
+
+3 - Criamos uma classe com nome de I na pasta interface, que vai ser nossa interface, vamos criar no microserviço
+da dependente que no nosso outro exemplo aqui é na Heroe, pois só posso cadastrar um Heroe se ele tiver uma league
+e dentro vamos criar um metodo, para saber se existe, assim evitando de salvar o dependente sem o independente ou seja
+de salvar nulo, e assim fazer o relacionamento. Código abaixo.
+Task<bool> DepartmentExists(Guid department);
+
+4 - Criamos a pasta Http em infrastructure e criamos o arquivo com nome de DepartmentClient ou leagueClient
+Dentro passamos a seguinte configuração 
+
+    public class DepartmentClient : IDepartmentClient
+    {
+        private readonly HttpClient _httpClient;
+
+        public DepartmentClient(HttpClient httpClient   )
+        {
+            _httpClient = httpClient;
+        }
+
+        public async Task<bool> DepartmentExists(Guid departmentId)
+        {
+	    //lembrando, essa linha de codigo ($"api/department/{departmentId}"); pegamos esses dados
+	    no outro microServiço que estamos se comunicando na controller dele oude fica [Route("ap/")] e etc
+            var response = await _httpClient.GetAsync($"api/department/{departmentId}");
+
+            return response.IsSuccessStatusCode;
+        }
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------
+5 - //Depois vamos na nossa service e temos que passar a Interface do outro microServiço que vamos se comunicar.
+    //seja ele no projeto de department ou Heroes, então passamos do atual e do outro microServiço que vamos se comunicar
+    //Ficando igual abaixo
+
+      private readonly IDepartmentClient _departmentClient;
+
+        public EmployeeService(IEmployee repository, IDepartmentClient _departmentClient)
+        {
+            _repository = repository;
+            _departmentClient = _departmentClient;
+        }
+
+Eae vamos no metodo Save e chamamos o metodo que criamos na Interface e no Http que é o metodo Exists deixando nosso save igual abaixo 
+
+   public async Task Save(Heroe heroe)
+   {
+       var leagueExists = await _repositoryLeague.LeaguesExists(heroe.LeagueId);
+       if (!leagueExists)
+       {
+           throw new Exception("League don't exists");
+       }
+       await _repository.Save(heroe);
+   }
+
+----------------------------------------------------------------------------------------------------------
+6- vamos no microserviço independente nesse caso o League ou Departament e temos que implementar o endPoint
+do FindById deixando ele assim 
+ [HttpGet("{id}")]
+ public async Task <IActionResult>FindById(Guid id)
+ {
+     var l = await _service.FindById(id);
+
+     if (l == null) return NotFound();
+
+     return Ok(l);
+ }
+
+---------------------------------------------------------------------------------------------
+
+7-Observação importante nos endPoints fazer sem /{id} e no http deixar sem o / depois do api ficando assim api e não /api.
+
+Eae por fim vamos no nosso program.cs e temos que inserir algumas informações spara funcionar 
+
+como por exemplo abaixo, só seguir e trocar de acordo com projeto de projeto para projeto. 
+
+
+using Application.Interfaces;
+using Application.Services;
+using Domain.Entities;
+using Infrastructure.Data;
+using Infrastructure.Http;
+using Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+/*Para rodar api*/
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data Source=app.db"));
+builder.Services.AddScoped<IHeroe, Repository>();
+builder.Services.AddScoped<Service>();
+/*Para rodar api*/
+
+
+//Comunicação dos micro serviços HttClient
+builder.Services.AddHttpClient<ILeague, LeagueClient>(Client =>
+{
+    Client.BaseAddress = new Uri("https://localhost:7139/");
+});
+builder.Services.AddScoped<Service>();
+
+
+var app = builder.Build();
+
+//Criar banco de dados
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.EnsureCreated();
+}
+
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+
+
+app.Run();
+
+
+
+-----------------------------------------------------------------------------
+
+Buscar e trazer os dados amarrados no relacionamento por referencia do microServiço
+
+Não vamos precisar mexer na program de novo porque nos já mexemos para fazer o save.
+
+1 - Criamos a DTO, primeiro a do Independente que fica dentro da dependente pois Heroe precisa de League para cadastrar
+então dentro do microServiço de heroe vamos criar LeagueDto e outra deto de relacionamento deles dois chamada
+HeroeLeagueDtoResponse. Exemplos abaixo
+
+ LeagueDto :
+ public Guid Id { get; private set; }
+ public String Name { get; set; }
+ public Boolean IsActive { get; set; }
+ public int NumberOfHeroes { get; set; }
+ public String Country { get; set; }
+
+HeroeLeagueDtoResponse :
+  public Guid Id { get; set; }
+  public String Name { get; set; }
+  public String HeroeName { get; set; }
+  public int Age { get; set; }
+
+  public LeagueDto League { get; set; }
+
+
+2 - criamos dentro de Heroe que é o dependente pois precisamos do League para cadastrar Heroe
+Então League é o independente. Criamos o codigo abaixo.
+
+Task<DepartmentDto> GetDepartmentById(Guid departmentId);
+
+3 - Repository colocamos nada
+
+
+4- dentro de DepartmentClient criamos o codigo: 
+
+   public async Task<LeagueDto> GetLeagueById(Guid LeagueId)
+   {
+       try
+       {
+           var response = await _httpClient.GetAsync($"api/league/{LeagueId}");
+           if (!response.IsSuccessStatusCode) return null;
+
+           var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+           var league = await response.Content.ReadFromJsonAsync<LeagueDto>(options);
+           return league;
+       }
+       catch (Exception ex)
+       {
+           Console.WriteLine($"Error ao buscar");
+           return null;
+       }        }
+
+
+5 - dentro de EmployeeService colocamos o codigo e criamos:
+
+   public async Task<List<HeroeLeagueDtoResponse>> FindAllHeroeLeague()
+  {
+      var heroes = await _repository.FindAll();
+      var result = new List<HeroeLeagueDtoResponse>();
+
+      foreach(var heroe in heroes)
+      {
+          var league = await _repositoryLeague.GetLeagueById(heroe.LeagueId);
+
+          result.Add(new HeroeLeagueDtoResponse
+          {
+              Id = heroe.Id,
+              Name = heroe.Name,
+              HeroeName = heroe.HeroeName,
+              Age = heroe.Age,
+              League = league
+
+
+
+          });
+      }
+      return result;
+  }
+ 
+
+
+
+6 - na controle EmployeeController criamos: 
+
+ [HttpGet("all")]
+ public async Task<IActionResult> GetAllWithDepartment()
+ {
+     var employees = await _service.GetAllWithDepartment();
+     return Ok(employees);
+ }
+
+
+7 - Nos microServiços que estão de comunicando temos que ter findById nos dois, nao posso esquecer! em todas as camadas
+
+--------------------------------------------------------------------------------------------------------------------------
+Busca amarrada apartir do relacionamento trazendo League e Heroe junto

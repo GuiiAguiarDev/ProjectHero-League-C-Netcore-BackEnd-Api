@@ -1,0 +1,81 @@
+[
+  {
+    "ContainingType": "ProjectTeam.Controllers.LeagueController",
+    "Method": "Save",
+    "RelativePath": "api/League",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "team",
+        "Type": "Domain.Entities.League",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectTeam.Controllers.LeagueController",
+    "Method": "FindAll",
+    "RelativePath": "api/League",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectTeam.Controllers.LeagueController",
+    "Method": "FindById",
+    "RelativePath": "api/League/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectTeam.Controllers.LeagueController",
+    "Method": "Update",
+    "RelativePath": "api/League/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "updateLeague",
+        "Type": "Domain.Entities.League",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ProjectTeam.Controllers.LeagueController",
+    "Method": "Delete",
+    "RelativePath": "api/League/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

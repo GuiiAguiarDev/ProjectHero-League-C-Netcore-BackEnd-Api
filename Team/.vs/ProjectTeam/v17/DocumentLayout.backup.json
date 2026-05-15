@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Guilherme Aguiar\\Desktop\\Heroes\\Team\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{239AB9CB-7D42-48DF-A5D1-9464B35E01B2}|Team\\ProjectTeam.csproj|c:\\users\\guilherme aguiar\\desktop\\heroes\\team\\team\\controllers\\leaguecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{239AB9CB-7D42-48DF-A5D1-9464B35E01B2}|Team\\ProjectTeam.csproj|solutionrelative:team\\controllers\\leaguecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A7062622-147B-43E8-BB06-AD610D452BF8}|Domain\\Domain.csproj|c:\\users\\guilherme aguiar\\desktop\\heroes\\team\\domain\\entities\\league.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A7062622-147B-43E8-BB06-AD610D452BF8}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\league.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LeagueController.cs",
+              "DocumentMoniker": "C:\\Users\\Guilherme Aguiar\\Desktop\\Heroes\\Team\\Team\\Controllers\\LeagueController.cs",
+              "RelativeDocumentMoniker": "Team\\Controllers\\LeagueController.cs",
+              "ToolTip": "C:\\Users\\Guilherme Aguiar\\Desktop\\Heroes\\Team\\Team\\Controllers\\LeagueController.cs",
+              "RelativeToolTip": "Team\\Controllers\\LeagueController.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAA5wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T15:13:08.96Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "League.cs",
+              "DocumentMoniker": "C:\\Users\\Guilherme Aguiar\\Desktop\\Heroes\\Team\\Domain\\Entities\\League.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\League.cs",
+              "ToolTip": "C:\\Users\\Guilherme Aguiar\\Desktop\\Heroes\\Team\\Domain\\Entities\\League.cs",
+              "RelativeToolTip": "Domain\\Entities\\League.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T14:23:48.301Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
